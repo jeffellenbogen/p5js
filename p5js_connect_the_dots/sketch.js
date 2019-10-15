@@ -13,6 +13,11 @@ function setup() {
   createCanvas(canvasWidth,canvasHeight);
   angleMode(DEGREES);
   noLoop();
+  colorMode(HSB, 255, 255, 255);
+}
+
+function drawDelay(x,y) {
+	setInterval(drawSpot(x,y),1000);
 }
 
 function drawSpot(x, y) {
@@ -22,17 +27,18 @@ function drawSpot(x, y) {
 function draw() {
 	var hue = random(100);
 	background(200,0,120);
-	counter=0;
+	
 	for (j = 0; j <= numRows - 1; j++)
 	{
-		counter++;
+		
 		for (i = 0; i <= numCols - 1; i++) //draws each row of circles
 		{
-			stroke(250,250,250);
-			fill(hue,0,100);
-			setTimeout(drawSpot(i,j), counter * 500 ); //trying to use setTimeout to individually display dots one-at-a-time
-			hue=hue+3;
-			if (hue >= 255){
+			stroke(0,0,250);
+			fill(hue,255,255);
+			drawDelay(i,j); //trying to use setTimeout to individually display dots one-at-a-time
+			hue=hue+4;
+			if (hue >= 255)
+			{
 				hue = 0;
 			}
 		}
