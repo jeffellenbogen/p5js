@@ -30,7 +30,7 @@ function draw() {
 		{
 			stroke(250,250,250);
 			fill(hue,0,100);
-			setTimeout(drawSpot(i,j), counter*500 ); //trying to use setTimeout to individually display dots one-at-a-time
+			setTimeout(drawSpot(i,j), counter * 500 ); //trying to use setTimeout to individually display dots one-at-a-time
 			hue=hue+3;
 			if (hue >= 255){
 				hue = 0;
