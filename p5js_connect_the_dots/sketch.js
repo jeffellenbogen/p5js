@@ -1,9 +1,9 @@
 var canvasWidth = 1400
 var canvasHeight = 700
-var circleRadius = 50
-var numRows = 8
-var numCols = 10
-var edgeSpace = 70
+var circleRadius = 100
+var numRows = 5
+var numCols = 6
+var edgeSpace = 80
 var rowSpacing = (canvasWidth - (2 * edgeSpace)) / (numCols - 1)
 var colSpacing = (canvasHeight - (2 * edgeSpace)) / (numRows - 1)
 
