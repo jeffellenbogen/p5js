@@ -1,12 +1,12 @@
 canvasWidth = 1400
 canvasHeight = 700
 
-circleRadius = 180
+circleRadius = 240
 radiusReducer = 0
 
-numRows = 5
+numRows = 4
 numCols = 7
-edgeSpace = circleRadius*3/4
+edgeSpace = circleRadius*7/8
 rowSpacing = (canvasWidth - (2 * edgeSpace)) / (numCols - 1)
 colSpacing = (canvasHeight - (2 * edgeSpace)) / (numRows - 1)
 x = 0
@@ -14,11 +14,12 @@ x = 0
 y = 0
 
 counter = 0
-totalLoops = 0
-maxLoops = 50
+totalLoops = 0 // loop counter, starts at zero loops completed
+maxLoops = 5 // max num of loops through whole pattern
 
 
 hue = 0
+alphaFill=150
 
 
 function setup() 
@@ -27,16 +28,18 @@ function setup()
 	createCanvas(canvasWidth,canvasHeight);
 	angleMode(DEGREES);
 
-	colorMode(HSB, 255, 255, 255);
-	background(255-hue,255,130);
+	colorMode(HSB, 255, 255, 255, 255); //Hue,Saturation,Brightness Model, Alpha
+	background(255,255,0) //black background
+
+	//background(255-hue,255,255); random background
 	stroke(0,0,255);
-	fill (hue,255,255)
+	fill (hue,255,255,alphaFill)
 	//noLoop();
 }
 
 function draw() 
 {
-	fill(hue,255,255);
+	fill(hue,255,255, 150);
 	circle(edgeSpace + (x * rowSpacing), edgeSpace + (y * colSpacing), circleRadius - radiusReducer );
 }
 
@@ -48,6 +51,7 @@ function newCircle(){
   	if (x >= numCols) // resets the x when dots move too far right
 	  	{
 		  	hue = random(255);
+		  	
 			x = 0
 			y++
 			if (y >= numRows) // resets the y when dots move too far down
@@ -73,7 +77,7 @@ function newCircle(){
 		}  
 }
 
-setInterval(newCircle,18); // draws the next circle based on current values of variables set throughout the program at an interval
+setInterval(newCircle,20); // draws the next circle based on current values of variables set throughout the program at an interval
 
 
 
