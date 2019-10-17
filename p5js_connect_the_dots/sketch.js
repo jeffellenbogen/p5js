@@ -1,50 +1,80 @@
 canvasWidth = 1400
 canvasHeight = 700
-circleRadius = 60
-numRows = 8
-numCols = 5
-edgeSpace = 80
+
+circleRadius = 180
+radiusReducer = 0
+
+numRows = 5
+numCols = 7
+edgeSpace = circleRadius*3/4
 rowSpacing = (canvasWidth - (2 * edgeSpace)) / (numCols - 1)
 colSpacing = (canvasHeight - (2 * edgeSpace)) / (numRows - 1)
 x = 0
+//xDrift = 0
 y = 0
+
 counter = 0
+totalLoops = 0
+maxLoops = 50
 
 
-function setup() {
-  createCanvas(canvasWidth,canvasHeight);
-  angleMode(DEGREES);
+hue = 0
 
-  colorMode(HSB, 255, 255, 255);
-  stroke(0,0,250);
-  background(200,255,255);
-  fill (random(255),255,255)
-  //noLoop();
+
+function setup() 
+{
+	hue = random(255)
+	createCanvas(canvasWidth,canvasHeight);
+	angleMode(DEGREES);
+
+	colorMode(HSB, 255, 255, 255);
+	background(255-hue,255,130);
+	stroke(0,0,255);
+	fill (hue,255,255)
+	//noLoop();
 }
 
-function draw() {
-	circle(edgeSpace + (x * rowSpacing), edgeSpace + (y*colSpacing), circleRadius);
+function draw() 
+{
+	fill(hue,255,255);
+	circle(edgeSpace + (x * rowSpacing), edgeSpace + (y * colSpacing), circleRadius - radiusReducer );
 }
 
 function newCircle(){
+	
 	counter++
-	var hue = random(255);
-	fill(hue,255,255);
 	x++
-  	if (x >= numCols)
+  	
+  	if (x >= numCols) // resets the x when dots move too far right
 	  	{
-		  	x = 0
-		  	y++
+		  	hue = random(255);
+			x = 0
+			y++
+			if (y >= numRows) // resets the y when dots move too far down
+	  		{
+		  		y = 0
+		  		totalLoops++ // tracks times through drawing ALL dots
+		  		radiusReducer+=round(circleRadius/10)
+		  		if (radiusReducer>circleRadius)
+		  		{
+		  			radiusReducer=0
+		  		}
+	  		}
 	  	}
-  	if (y >= numRows)
-	  	{
-	  		y = 0
-	  	}
-	 if (counter >= numRows * numCols - 1) 
-	 	noLoop()	
-  
+  	
+	if (counter >= numRows * numCols - 1)  // tracks dots drawn in all rows * columns once through
+	 	{
+	 	
+	 	if (totalLoops >= maxLoops)	// tracks total loops through whole pattern
+	 		{
+		 		counter = 0
+		 		noLoop()	// stops draw from looping
+	 		}
+		}  
 }
 
-setInterval(newCircle,50);
+setInterval(newCircle,18); // draws the next circle based on current values of variables set throughout the program at an interval
+
+
 
 
