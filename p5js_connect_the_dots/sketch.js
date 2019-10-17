@@ -6,6 +6,11 @@ radiusReducer = 0
 
 numRows = 4
 numCols = 7
+
+edgeSpace = 1
+rowSpacing = 1
+colSpacing = 1
+
 edgeSpace = circleRadius*7/8
 rowSpacing = (canvasWidth - (2 * edgeSpace)) / (numCols - 1)
 colSpacing = (canvasHeight - (2 * edgeSpace)) / (numRows - 1)
@@ -13,9 +18,9 @@ x = 0
 //xDrift = 0
 y = 0
 
-counter = 0
+counter = 1
 totalLoops = 0 // loop counter, starts at zero loops completed
-maxLoops = 5 // max num of loops through whole pattern
+maxLoops = 7 // max num of loops through whole pattern
 
 
 hue = 0
@@ -71,14 +76,14 @@ function newCircle(){
 	 	
 	 	if (totalLoops >= maxLoops)	// tracks total loops through whole pattern
 	 		{
-		 		counter = 0
+		 		counter = 1
 		 		noLoop()	// stops draw from looping
 	 		}
 		}  
 }
 
+
+
 setInterval(newCircle,20); // draws the next circle based on current values of variables set throughout the program at an interval
-
-
 
 
