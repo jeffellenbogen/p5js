@@ -1,7 +1,7 @@
 canvasWidth = 1400
 canvasHeight = 700
 circleRadius = 50
-circleDelta = 5
+circleDelta = 6
 xLocation = 0
 xDelta = 10
 backgroundHUE = 0
@@ -22,7 +22,7 @@ function setup() {
 
 
 function draw() {
-	//background(backgroundHUE,255,255) // comment this statement out and uncomment line 19 to continuously draw new circles
+	background(backgroundHUE,255,255) // comment this statement out and uncomment line 19 to continuously draw new circles
 	fill(hue,255,255)
 	circle(xLocation,mouseY, circleRadius);
 

@@ -1,11 +1,11 @@
 canvasWidth = 1400
 canvasHeight = 700
 
-circleRadius = 240
+circleRadius = 200
 radiusReducer = 0
 
-numRows = 4
-numCols = 7
+numRows = 3
+numCols = 5
 
 edgeSpace = 1
 rowSpacing = 1
