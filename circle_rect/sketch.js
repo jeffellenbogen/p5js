@@ -1,22 +1,32 @@
-canvasHeightWidth = 500
-
 numLevels = 8
-
+sideLen = undefined;
+sideLenInc = 50;
+cnv = undefined;
 
 function setup() {
-  createCanvas(canvasHeightWidth,canvasHeightWidth);
+
   colorMode(RGB, 255, 255, 255, 255); //Hue,Saturation,Brightness 
-  background(255,255,255,255) //white background
+  background(255,255,255) //white background
   stroke(0,200,255,255); // blue stroke
   noFill();
-//  fill(0,0,0,0); //white fill w/ no opacity
   strokeWeight(3);
+  cnv = createCanvas(windowHeight, windowHeight);
+  sideLen = floor(windowHeight/sideLenInc)*sideLenInc;
+  cnv.position((windowWidth - windowHeight) / 2  , 0);
 
-}1
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+
+  sideLen = floor(windowHeight/sideLenInc)*sideLenInc;
+  cnv.position((windowWidth - windowHeight) / 2  , 0);
+  background(255,255,255) //white background
+}
 
 function draw() {
-	counter = 0;
-	spacing = canvasHeightWidth / numLevels / 2;
+	strokeWeight(3);
+	spacing = windowWidth / numLevels / 2;
 
 	for (var x = 1; x <= numLevels*2; x++)
 	{
@@ -24,9 +34,9 @@ function draw() {
 		if ((x % 2) == 1)
 		{
 			stroke(0,200,255,255); // blue stroke
-			rect(increment,increment,canvasHeightWidth -(x*spacing), canvasHeightWidth -(x*spacing));
+			rect(increment,increment,sideLen -(x*spacing), sideLen -(x*spacing));
 			stroke(255,0,150,100); // pink stroke
-			circle(canvasHeightWidth/2,canvasHeightWidth/2,canvasHeightWidth -(x*spacing));
+			circle(sideLen/2,sideLen/2,sideLen -(x*spacing));
 		}
 		
 	}
