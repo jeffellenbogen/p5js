@@ -1,6 +1,6 @@
 numLevels = 8
-sideLen = undefined;
 sideLenInc = 50;
+sideLen = undefined;
 cnv = undefined;
 
 function setup() {
@@ -9,10 +9,11 @@ function setup() {
   background(255,255,255) //white background
   stroke(0,200,255,255); // blue stroke
   noFill();
-  strokeWeight(3);
+  strokeWeight(5);
+
   cnv = createCanvas(windowHeight, windowHeight);
   sideLen = floor(windowHeight/sideLenInc)*sideLenInc;
-  cnv.position((windowWidth - windowHeight) / 2  , 0);
+  cnv.position(Math.abs(windowWidth - windowHeight) / 2  , 0);
 
 }
 
