@@ -5,16 +5,30 @@
 var colorKnob;
 
 function setup() {
-  createCanvas(600, 400); background(100);
+  createCanvas(windowWidth, windowHeight); 
+  background(0);
   // example values
-  colorKnob = new MakeKnobC("red", 100, width/2, height/2, 0, 255, 0, 0,"Background", [0,200,200], 18);
+  colorKnobR = new MakeKnobC("red", 100, width/2-200, height*.7, 0, 255, 0, 0,"Red", "white", 16);
+  colorKnobG = new MakeKnobC("green", 100, width/2, height*.7, 0, 255, 0, 0,"Green", "white", 16);
+  colorKnobB = new MakeKnobC("blue", 100, width/2+200, height*.7, 0, 255, 0, 0,"Blue", "white", 16);
+
 }
 
 function draw() {
-  background(colorKnob.knobValue); // Use the knob to control something
-  colorKnob.update();
+  background(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue); // Use the knob to control something
+  colorKnobR.update();
+  colorKnobG.update();
+  colorKnobB.update();
 }
 
-function mousePressed() { colorKnob.active(); }
+function mousePressed() { 
+	colorKnobR.active(); 
+	colorKnobG.active(); 
+	colorKnobB.active(); 
+}
 
-function mouseReleased() { colorKnob.inactive(); }
+function mouseReleased() {
+	colorKnobR.inactive(); 
+	colorKnobG.inactive(); 
+	colorKnobB.inactive(); 
+}

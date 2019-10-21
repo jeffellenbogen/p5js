@@ -5,22 +5,26 @@ spacing = undefined;
 numLevels = undefined;
 tempLevels = undefined;
 edgeBuffer = 50;
+numLevelsSlider = undefined;
 
 function setup() {
   colorMode(RGB, 255, 255, 255, 255); //Hue,Saturation,Brightness 
   background(255,255,255) //white background
   stroke(0,200,255,255); // blue stroke
-  noFill();
-  textSize(15);
 
   cnv = createCanvas(windowHeight, windowHeight - edgeBuffer);
   sideLen = windowHeight - edgeBuffer;
   cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
 
   numLevelsSlider = createSlider(4, 20, 8);
-  numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
+  numLevelsSlider.position(100, 100);
   numLevels = numLevelsSlider.value()
-  text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
+ //numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
+ //text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
+  fill(0);
+  text('test',50,50)
+  text('Dogs', 100, 130);
+  noFill();
 }
 
 function windowResized() {
@@ -28,13 +32,16 @@ function windowResized() {
   sideLen = windowHeight - edgeBuffer
   cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
   background(255,255,255) //white background
-  numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
-  text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
-
+  //numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
+  //text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
+  fill(0);
+  numLevelsSlider.position(100, 100);
+  text('Gato', 100, 130);
+  noFill();
 }
 
 function draw() {
-	//noFill();
+	
 	strokeWeight(3);
 	tempLevels = numLevelsSlider.value();
 	if (tempLevels != numLevels){
