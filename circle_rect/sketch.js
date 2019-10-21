@@ -15,11 +15,10 @@ function setup() {
 
   cnv = createCanvas(windowHeight, windowHeight - edgeBuffer);
   sideLen = windowHeight - edgeBuffer;
-  cnv.position(Math.abs(windowWidth - sideLen) / 2 + edgeBuffer, 0);
-
+  cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
 
   numLevelsSlider = createSlider(4, 20, 8);
-  numLevelsSlider.position(windowWidth/ 2, windowHeight- edgeBuffer);
+  numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
   numLevels = numLevelsSlider.value()
   text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
 }
@@ -27,10 +26,9 @@ function setup() {
 function windowResized() {
   resizeCanvas(windowHeight, windowHeight - edgeBuffer);
   sideLen = windowHeight - edgeBuffer
-  cnv.position(Math.abs(windowWidth - sideLen) / 2 + edgeBuffer, 0);
+  cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
   background(255,255,255) //white background
-  numLevelsSlider.position(windowWidth/ 2, windowHeight- edgeBuffer);
-
+  numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
   text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
 
 }
