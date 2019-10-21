@@ -72,7 +72,7 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
       this.mouseOver = false;
     }
     if (mouseIsPressed && this.isClickedOn) { 
-      this.rotateMe=this.currentRot+map(mouseY, this.myY, 280, 0, 280);
+      this.rotateMe=this.currentRot-map(mouseY, this.myY, 280, 0, 280); // subtract map(...) to increase rotateMe while dragging up
       this.rotateMe=int(this.rotateMe);
       if (this.rotateMe <  -280) { this.rotateMe = -280; }
       if (this.rotateMe > 0) { this.rotateMe = 0; }
