@@ -59,7 +59,7 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
   // the update function will be called in the main program draw function
   this.update = function() {
     push(); // store the coordinate matrix ------------------------------------
-       fill(255);
+    fill(255);
     // move the origin to the pivot point
     translate(this.pos.x, this.pos.y);
 
@@ -95,7 +95,7 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
     fill(180);
     ellipse(0,0,(this.radius/2)-5,(this.radius/2)-5);
     fill(255);
-    ellipse(-26, this.radius* 0.3, this.radius/10,this.radius/10);
+    ellipse(-.2 *this.radius, this.radius* 0.3, this.radius/10,this.radius/10);
     fill(0);
     pop(); // restore coordinate matrix
   
@@ -106,8 +106,8 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
     this.knobValue=map(this.rotateMe, -280, 0, hiNum, lowNum);
     textSize(this.textPt);
     fill(this.textColor);
-    text(""+ nfc(this.knobValue, numPlaces), this.pos.x, this.pos.y+this.radius/2+this.textPt*1.5); 
-    text(this.label, this.pos.x, this.pos.y+this.radius/2+this.textPt*2.8);
+    text(""+ nfc(this.knobValue, numPlaces), this.pos.x, this.pos.y+this.radius/2+20); 
+    text(this.label, this.pos.x, this.pos.y+this.radius/2+40);
   
     if (this.mouseOver || this.isClickedOn) { pointerCursor = true; }
   }; // end update
@@ -128,5 +128,6 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
     this.isClickedOn = false;
     cursor('default');
   }
+
 
 } // end KnobMakerC
