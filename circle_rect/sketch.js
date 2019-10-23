@@ -2,15 +2,15 @@
 var sideLen;
 var cnv;
 var spacing;
+
 var numLevels;
 var numLevelsMin=2;
 var numLevelsMax=20;
 var numLevelsSliderStart = 10;
 var tempLevels;
+
 var edgeBuffer = 50;
 var sidebarBufferWidth = 200;
-
-
 var mainBuffer;
 var sidebarBuffer;
 
