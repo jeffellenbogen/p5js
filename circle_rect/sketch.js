@@ -2,33 +2,35 @@
 sideLen = undefined;
 cnv = undefined;
 spacing = undefined;
-numLevels = undefined;
+var numLevels;
+var numLevelsMin=2;
+var numLevelsMax=20;
+var numLevelsSliderStart = 10;
 tempLevels = undefined;
 edgeBuffer = 50;
-numLevelsSlider = undefined;
+
+
+var mainBuffer;
+var sidebarBuffer;
 
 function setup() {
   colorMode(RGB, 255, 255, 255, 255); //Hue,Saturation,Brightness 
-  background(255,255,255) //white background
+//    background(255,255,255, 255) //white background
   stroke(0,200,255,255); // blue stroke
 
-  cnv = createCanvas(windowHeight, windowHeight - edgeBuffer);
-  sideLen = windowHeight - edgeBuffer;
-  cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
+  createCanvas(windowWidth, windowHeight);
+  mainBuffer = createGraphics(windowWidth * .8, windowHeight);
+  sidebarBuffer = createGraphics(windowWidth * .2, windowHeight);
 
-  numLevelsSlider = createSlider(4, 20, 8);
-  numLevelsSlider.position(100, 100);
-  numLevels = numLevelsSlider.value()
- //numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
- //text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
-  fill(0);
-  text('test',50,50)
-  text('Dogs', 100, 130);
+  sideLen = windowHeight - edgeBuffer;
+  numLevelsSlider = createSlider(numLevelsMin, numLevelsMax, numLevelsSliderStart);
+
   noFill();
 }
 
+/*
 function windowResized() {
-  resizeCanvas(windowHeight, windowHeight - edgeBuffer);
+  resizeCanvas(windowWidth, windowHeight);
   sideLen = windowHeight - edgeBuffer
   cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
   background(255,255,255) //white background
@@ -39,14 +41,26 @@ function windowResized() {
   text('Gato', 100, 130);
   noFill();
 }
+*/
 
 function draw() {
-	
-	strokeWeight(3);
+  drawSidebarBuffer();
+  drawMainBuffer();
+  image(sidebarBuffer,0,0);
+  image(mainBuffer,windowWidth * .2,0);
+}
+
+function drawMainBuffer() {
+  mainBuffer.fill(255,255,0 , 255);
+  mainBuffer.rect(0,0,sideLen, sidebarBuffer)
+	mainBuffer.clear();
+  mainBuffer.strokeWeight(5);
 	tempLevels = numLevelsSlider.value();
 	if (tempLevels != numLevels){
 		numLevels = tempLevels;
-		clear();
+		mainBuffer.clear();
+    mainBuffer.stroke(255,255,0, 255);
+    mainBuffer.rect(0,0,sideLen, sidebarBuffer)
 	}
 	spacing = sideLen / numLevels/ 2;
 	for (var x = 1; x <= numLevels*2; x++)
@@ -54,10 +68,21 @@ function draw() {
 		increment = .5 * x * spacing;
 		if ((x % 2) == 1)
 		{
-			stroke(0,200,255,150); // blue stroke
-			rect(increment,increment,sideLen - (x*spacing), sideLen -(x*spacing));
-			stroke(255,0,150,150); // pink stroke
-			circle(sideLen/2,sideLen/2,sideLen - (x*spacing));
+      mainBuffer.noFill();
+			mainBuffer.stroke(0,200,255,150); // blue stroke
+			mainBuffer.rect(increment,increment,sideLen - (x*spacing), sideLen -(x*spacing));
+			mainBuffer.stroke(255,0,150,150); // pink stroke
+			mainBuffer.circle(sideLen/2,sideLen/2,sideLen - (x*spacing));
 		}	
 	}
+}
+
+function drawSidebarBuffer(){
+  sidebarBuffer.stroke(255,255,0);
+  sidebarBuffer.strokeWeight(3);
+  sidebarBuffer.textSize(15);
+  sidebarBuffer.fill(0);
+  numLevelsSlider.position(25, 25);
+  sidebarBuffer.text(numLevelsMin + "   numLevels     " + numLevelsMax,25,60);
+  numLevels = numLevelsSlider.value();
 }
