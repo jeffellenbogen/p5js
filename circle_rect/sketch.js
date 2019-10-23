@@ -1,13 +1,14 @@
-//numLevels = 10
-sideLen = undefined;
-cnv = undefined;
-spacing = undefined;
+
+var sideLen;
+var cnv;
+var spacing;
 var numLevels;
 var numLevelsMin=2;
 var numLevelsMax=20;
 var numLevelsSliderStart = 10;
-tempLevels = undefined;
-edgeBuffer = 50;
+var tempLevels;
+var edgeBuffer = 50;
+var sidebarBufferWidth = 200;
 
 
 var mainBuffer;
@@ -15,52 +16,43 @@ var sidebarBuffer;
 
 function setup() {
   colorMode(RGB, 255, 255, 255, 255); //Hue,Saturation,Brightness 
-//    background(255,255,255, 255) //white background
-  stroke(0,200,255,255); // blue stroke
 
   createCanvas(windowWidth, windowHeight);
-  mainBuffer = createGraphics(windowWidth * .8, windowHeight);
-  sidebarBuffer = createGraphics(windowWidth * .2, windowHeight);
+  mainBuffer = createGraphics(windowWidth - sidebarBufferWidth, windowHeight);
+  sidebarBuffer = createGraphics(sidebarBufferWidth, windowHeight);
 
   sideLen = windowHeight - edgeBuffer;
   numLevelsSlider = createSlider(numLevelsMin, numLevelsMax, numLevelsSliderStart);
-
+  numLevels = numLevelsSliderStart;
   noFill();
 }
 
-/*
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   sideLen = windowHeight - edgeBuffer
-  cnv.position(Math.abs(windowWidth - sideLen) / 2 , 0);
-  background(255,255,255) //white background
-  //numLevelsSlider.position(windowWidth/ 2 - edgeBuffer, windowHeight- edgeBuffer);
-  //text('numLevels', numLevelsSlider.x * 2 + numLevelsSlider.width, numLevelsSlider.y + 2);
-  fill(0);
-  numLevelsSlider.position(100, 100);
-  text('Gato', 100, 130);
-  noFill();
+  mainBuffer.fill(255);
+  mainBuffer.stroke(255); 
+  mainBuffer.rect(0,0,windowWidth- sidebarBufferWidth , windowHeight)
 }
-*/
 
 function draw() {
   drawSidebarBuffer();
   drawMainBuffer();
   image(sidebarBuffer,0,0);
-  image(mainBuffer,windowWidth * .2,0);
+  image(mainBuffer,sidebarBufferWidth,0);
+  numLevelsSlider.position(35, 25);
+  numLevels = numLevelsSlider.value();
 }
 
 function drawMainBuffer() {
-  mainBuffer.fill(255,255,0 , 255);
-  mainBuffer.rect(0,0,sideLen, sidebarBuffer)
-	mainBuffer.clear();
-  mainBuffer.strokeWeight(5);
+  mainBuffer.strokeWeight(4);
 	tempLevels = numLevelsSlider.value();
 	if (tempLevels != numLevels){
 		numLevels = tempLevels;
-		mainBuffer.clear();
-    mainBuffer.stroke(255,255,0, 255);
-    mainBuffer.rect(0,0,sideLen, sidebarBuffer)
+    mainBuffer.fill(255);
+    mainBuffer.stroke(255); 
+    mainBuffer.rect(0,0,sideLen, sideLen)
 	}
 	spacing = sideLen / numLevels/ 2;
 	for (var x = 1; x <= numLevels*2; x++)
@@ -78,11 +70,15 @@ function drawMainBuffer() {
 }
 
 function drawSidebarBuffer(){
-  sidebarBuffer.stroke(255,255,0);
+
+  sidebarBuffer.stroke(0,200,255);
   sidebarBuffer.strokeWeight(3);
   sidebarBuffer.textSize(15);
-  sidebarBuffer.fill(0);
-  numLevelsSlider.position(25, 25);
-  sidebarBuffer.text(numLevelsMin + "   numLevels     " + numLevelsMax,25,60);
-  numLevels = numLevelsSlider.value();
+  sidebarBuffer.text(numLevelsMin + "   numLevels     " + numLevelsMax,35,60);
+
+  sidebarBuffer.stroke(255,0,150);
+  sidebarBuffer.strokeWeight(4);
+  sidebarBuffer.textSize(20);
+  sidebarBuffer.text("NumLevels = " + numLevels,35,120); 
+
 }
