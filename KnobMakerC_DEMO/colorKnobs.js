@@ -24,7 +24,8 @@ function draw() {
   colorKnobG.update();
   colorKnobB.update();
   textSize(width/10);
-  fill(255 - int(colorKnobR.knobValue + colorKnobG.knobValue + colorKnobB.knobValue)/3);
+  fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
+  //fill(255 - int(colorKnobR.knobValue + colorKnobG.knobValue + colorKnobB.knobValue)/3);
 
   text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, height/5)
 }
