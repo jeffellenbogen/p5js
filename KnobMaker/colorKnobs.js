@@ -26,7 +26,6 @@ function draw() {
   textSize(width/10);
   fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
   //fill(255 - int(colorKnobR.knobValue + colorKnobG.knobValue + colorKnobB.knobValue)/3);
-
   text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, height/5)
 }
 
@@ -51,7 +50,6 @@ function windowResized() {
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob*knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobR.knobValue, 0,"Red", "white", 16);
   colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobG.knobValue, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
-
 }
 
 client = new Paho.MQTT.Client("makerlabPi1", 1883, "knobMQTT");
