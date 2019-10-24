@@ -16,7 +16,21 @@ function setup() {
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
   colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
+
+
+  client = new Paho.MQTT.Client("makerlabPi1", 9001, "knobMQTT");
+  client.connect({onSuccess:onConnect});
 }
+
+function onConnect() {
+  // Once a connection has been made, make a subscription and send a message.
+  console.log("onConnect");
+  client.subscribe("World");
+  message = new Paho.MQTT.Message("Hello");
+  message.destinationName = "World";
+  client.send(message);
+}
+
 
 function draw() {
   background(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue); // Use the knob to control something
@@ -33,9 +47,6 @@ function mousePressed() {
 	colorKnobR.active(); 
 	colorKnobG.active(); 
 	colorKnobB.active(); 
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
-  client.send(message);
 }
 
 function mouseReleased() {
@@ -52,4 +63,3 @@ function windowResized() {
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
 }
 
-client = new Paho.MQTT.Client("makerlabPi1", 1883, "knobMQTT");
