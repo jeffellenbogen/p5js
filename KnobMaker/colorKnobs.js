@@ -25,9 +25,9 @@ function setup() {
 function onConnect() {
   // Once a connection has been made, make a subscription and send a message.
   console.log("onConnect");
-  client.subscribe("World");
-  message = new Paho.MQTT.Message("Hello");
-  message.destinationName = "World";
+  client.subscribe("Knobs");
+  message = new Paho.MQTT.Message("Knobs Connected!");
+  message.destinationName = "Knobs";
   client.send(message);
 }
 
@@ -53,6 +53,9 @@ function mouseReleased() {
 	colorKnobR.inactive(); 
 	colorKnobG.inactive(); 
 	colorKnobB.inactive(); 
+  message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
+  message.destinationName = "Knobs";
+  client.send(message);
 }
 
 function windowResized() {
