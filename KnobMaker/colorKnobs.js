@@ -16,8 +16,6 @@ function setup() {
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
   colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
-
-
   client = new Paho.MQTT.Client("makerlabPi1", 9001, "knobMQTT");
   client.connect({onSuccess:onConnect});
 }
@@ -29,8 +27,6 @@ function onConnect() {
   message = new Paho.MQTT.Message("Knobs Connected!");
   message.destinationName = "Knobs";
   client.send(message);
-}
-
 
 function draw() {
   background(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue); // Use the knob to control something
@@ -56,6 +52,7 @@ function mouseReleased() {
   message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
   message.destinationName = "Knobs";
   client.send(message);
+
 }
 
 function windowResized() {
