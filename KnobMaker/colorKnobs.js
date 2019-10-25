@@ -25,6 +25,7 @@ function onConnect() {
   message = new Paho.MQTT.Message("Knobs Connected!");
   message.destinationName = "Knobs";
   client.send(message);
+}
 
 function draw() {
   background(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue); // Use the knob to control something
@@ -49,7 +50,6 @@ function mouseReleased() {
   message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
   message.destinationName = "Knobs";
   client.send(message);
-
 }
 
 function windowResized() {
