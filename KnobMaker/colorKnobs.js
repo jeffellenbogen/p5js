@@ -12,7 +12,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight); 
   background(0);
   radiusKnob = windowWidth * radiusWindowWidthRatio;
-  // example values
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
   colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
@@ -21,7 +20,6 @@ function setup() {
 }
 
 function onConnect() {
-  // Once a connection has been made, make a subscription and send a message.
   console.log("onConnect");
   client.subscribe("Knobs");
   message = new Paho.MQTT.Message("Knobs Connected!");
@@ -35,7 +33,6 @@ function draw() {
   colorKnobB.update();
   textSize(width/10);
   fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
-  //fill(255 - int(colorKnobR.knobValue + colorKnobG.knobValue + colorKnobB.knobValue)/3);
   text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, height/5)
 }
 
