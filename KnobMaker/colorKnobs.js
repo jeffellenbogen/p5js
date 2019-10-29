@@ -47,16 +47,18 @@ function mouseReleased() {
 	colorKnobR.inactive(); 
 	colorKnobG.inactive(); 
 	colorKnobB.inactive(); 
-  //message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
-  message = new Paho.MQTT.Message(int(colorKnobR.knobValue));
+  message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
+  
+  message = new Paho.MQTT.Message(str(int(colorKnobR.knobValue)));
   message.destinationName = "color/red";
   client.send(message);
-  message = new Paho.MQTT.Message(int(colorKnobG.knobValue));
+  message = new Paho.MQTT.Message(str(int(colorKnobG.knobValue)));
   message.destinationName = "color/green";
   client.send(message);
-  message = new Paho.MQTT.Message(int(colorKnobB.knobValue));
+  message = new Paho.MQTT.Message(str(int(colorKnobB.knobValue)));
   message.destinationName = "color/blue";
   client.send(message);  
+  
 }
 
 function windowResized() {
