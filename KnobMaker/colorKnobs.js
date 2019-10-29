@@ -15,13 +15,13 @@ function setup() {
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
   colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
-  client = new Paho.MQTT.Client("makerlabPi1", 9001, "knobMQTT");
+  client = new Paho.MQTT.Client("makerlabPi1", 9001, "colorKnobs.js");
   client.connect({onSuccess:onConnect});
 }
 
 function onConnect() {
-  console.log("onConnect");
-  client.subscribe("Knobs");
+  //console.log("onConnect");
+  //client.subscribe("Knobs");
   message = new Paho.MQTT.Message("Knobs Connected!");
   message.destinationName = "Knobs";
   client.send(message);
@@ -47,9 +47,16 @@ function mouseReleased() {
 	colorKnobR.inactive(); 
 	colorKnobG.inactive(); 
 	colorKnobB.inactive(); 
-  message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
-  message.destinationName = "Knobs";
+  //message = new Paho.MQTT.Message("R: "+ int(colorKnobR.knobValue) + " G: "+int(colorKnobG.knobValue) + " B: "+int(colorKnobB.knobValue));
+  message = new Paho.MQTT.Message(int(colorKnobR.knobValue));
+  message.destinationName = "color/red";
   client.send(message);
+  message = new Paho.MQTT.Message(int(colorKnobG.knobValue));
+  message.destinationName = "color/green";
+  client.send(message);
+  message = new Paho.MQTT.Message(int(colorKnobB.knobValue));
+  message.destinationName = "color/blue";
+  client.send(message);  
 }
 
 function windowResized() {
