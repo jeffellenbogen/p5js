@@ -20,11 +20,11 @@ function setup() {
   donutHoleSize = donutSize * donutHoleSizeScaleFactor;
   stroke(0,0,0);
   strokeWeight(4);
-  background(0);
+  background(255);
   
-  fill(255, 255 , 255);
-  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
   fill(0);
+  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
+  fill(255);
   ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
 
 
@@ -58,19 +58,19 @@ function onConnect() {
 }
 
 function draw() {
-  background(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue); // Use the knob to control something
+  background(255-colorKnobR.knobValue,255-colorKnobG.knobValue,255-colorKnobB.knobValue); // Use the knob to control something
   colorKnobR.update();
   colorKnobG.update();
   colorKnobB.update();
   strokeWeight(4);
 
-  fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
-  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
   fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
+  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
+  fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
   ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
 
   textSize(width/20);
-  fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
+  fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
   strokeWeight(3);
   text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, height/10);
 
