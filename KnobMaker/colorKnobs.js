@@ -11,7 +11,8 @@ var knobSpaceFactor=1.5;
 var knobSpaceFromBottomFactor=1.5;
 var donutSizeScaleFactor = 3;
 var donutHoleSizeScaleFactor = .3;
-var donutStretchRatio = .7  ;
+var donutStretchRatio = .7;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight); 
@@ -28,9 +29,9 @@ function setup() {
   ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
 
 
-  colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
-  colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
-  colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
+  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
+  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
+  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
  
   uniqueID = int(10000*Math.random(10000))
   alert = uniqueID
@@ -104,9 +105,9 @@ function windowResized() {
   radiusKnob = windowWidth * radiusWindowWidthRatio;
   donutSize = radiusKnob * donutSizeScaleFactor;
   donutHoleSize = donutSize * donutHoleSizeScaleFactor;
-  colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob*knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobR.knobValue, 0,"Red", "white", 16);
-  colorKnobG = new MakeKnobC("green", radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobG.knobValue, 0,"Green", "white", 16);
-  colorKnobB = new MakeKnobC("blue", radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
+  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob*knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobR.knobValue, 0,"Red", "white", 16);
+  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobG.knobValue, 0,"Green", "white", 16);
+  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
 }
 
 
