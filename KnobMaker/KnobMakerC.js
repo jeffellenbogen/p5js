@@ -86,6 +86,7 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
       this.isClickedOn = false;
     } 
     // now we actually draw the knob to the screen ----------------------------
+    strokeWeight(1);
     fill(200);
     ellipse(0, 0, this.radius, this.radius);
     fill(this.knobColor);
