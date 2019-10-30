@@ -9,8 +9,9 @@ var donutHoleSize;
 var radiusWindowWidthRatio=.10
 var knobSpaceFactor=1.5;
 var knobSpaceFromBottomFactor=1.5;
-var donutSizeScaleFactor = 1.3;
-var donutHoleSizeScaleFactor = .5
+var donutSizeScaleFactor = 3;
+var donutHoleSizeScaleFactor = .3;
+var donutStretchRatio = .7  ;
 
 function setup() {
   createCanvas(windowWidth, windowHeight); 
@@ -18,12 +19,13 @@ function setup() {
   donutSize = radiusKnob * donutSizeScaleFactor;
   donutHoleSize = donutSize * donutHoleSizeScaleFactor;
   stroke(0,0,0);
-  strokeWeight(5);
+  strokeWeight(4);
   background(0);
+  
   fill(255, 255 , 255);
-  circle(width/2, height/3,donutSize);
+  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
   fill(0);
-  circle(width/2, height/3, donutHoleSize);
+  ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
 
 
   colorKnobR = new MakeKnobC("red", radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
@@ -60,11 +62,13 @@ function draw() {
   colorKnobR.update();
   colorKnobG.update();
   colorKnobB.update();
-  strokeWeight(2);
+  strokeWeight(4);
+
   fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
-  circle(width/2,height/3, donutSize);
+  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
   fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
-  circle(width/2,height/3, donutHoleSize);  
+  ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
+
   textSize(width/20);
   fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
   strokeWeight(3);
