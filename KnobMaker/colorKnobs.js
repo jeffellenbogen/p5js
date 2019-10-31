@@ -9,7 +9,7 @@ var donutHoleSize;
 var radiusWindowWidthRatio=.15;
 var knobSpaceFactor=1.5;
 var knobSpaceFromBottomFactor=2;
-var donutSizeScaleFactor = 3;
+var donutSizeScaleFactor = 2;
 var donutHoleSizeScaleFactor = .3;
 var donutStretchRatio = .7;
 
