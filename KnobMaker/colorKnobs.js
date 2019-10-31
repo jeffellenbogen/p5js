@@ -6,9 +6,9 @@ var colorKnobR, colorKnobG, colorKnobB;
 var radiusKnob;
 var donutSize;
 var donutHoleSize;
-var radiusWindowWidthRatio=.10
+var radiusWindowWidthRatio=.15;
 var knobSpaceFactor=1.5;
-var knobSpaceFromBottomFactor=1.5;
+var knobSpaceFromBottomFactor=2;
 var donutSizeScaleFactor = 3;
 var donutHoleSizeScaleFactor = .3;
 var donutStretchRatio = .7;
@@ -24,14 +24,14 @@ function setup() {
   background(255);
   
   fill(0);
-  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
+  ellipse(width/2, height*.35, donutSize, donutSize * donutStretchRatio);
   fill(255);
-  ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
+  ellipse(width/2, height*.35, donutHoleSize, donutHoleSize * donutStretchRatio);
 
 
-  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Red", "white", 16);
-  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Green", "white", 16);
-  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, 0, 0,"Blue", "white", 16);
+  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob * knobSpaceFactor, height - 150, 0, 255, 0, 0,"Red", "white", 16);
+  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - 150, 0, 255, 0, 0,"Green", "white", 16);
+  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - 150, 0, 255, 0, 0,"Blue", "white", 16);
  
   uniqueID = int(10000*Math.random(10000))
   alert = uniqueID
@@ -66,15 +66,16 @@ function draw() {
   strokeWeight(4);
 
   fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
-  ellipse(width/2, height/3,donutSize, donutSize * donutStretchRatio);
+  ellipse(width/2, height*.35, donutSize, donutSize * donutStretchRatio);
   fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
-  ellipse(width/2, height/3, donutHoleSize, donutHoleSize * donutStretchRatio);
+  ellipse(width/2, height*.35, donutHoleSize, donutHoleSize * donutStretchRatio);
 
-  textSize(width/20);
+  textSize(40);
   fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
   strokeWeight(3);
-  text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, height/10);
-
+  stroke(255);
+  text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, 40);
+  stroke(0);
 }
 
 function mousePressed() { 
@@ -105,9 +106,9 @@ function windowResized() {
   radiusKnob = windowWidth * radiusWindowWidthRatio;
   donutSize = radiusKnob * donutSizeScaleFactor;
   donutHoleSize = donutSize * donutHoleSizeScaleFactor;
-  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob*knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobR.knobValue, 0,"Red", "white", 16);
-  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobG.knobValue, 0,"Green", "white", 16);
-  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - knobSpaceFromBottomFactor * radiusKnob, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
+  colorKnobR = new MakeKnobC([255,0,0], radiusKnob, width/2 - radiusKnob*knobSpaceFactor, height - 150, 0, 255, colorKnobR.knobValue, 0,"Red", "white", 16);
+  colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - 150, 0, 255, colorKnobG.knobValue, 0,"Green", "white", 16);
+  colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - 150, 0, 255, colorKnobB.knobValue, 0,"Blue", "white", 16);
 }
 
 
