@@ -1,6 +1,7 @@
 // KnobMakerC Example
 // Miles DeCoster - CodeForArtists.com
 
+
 // Create a variable for each instance of a knob or make bunch with an array
 var colorKnobR, colorKnobG, colorKnobB;
 var radiusKnob;
@@ -33,18 +34,19 @@ function setup() {
   colorKnobG = new MakeKnobC([0,255,0], radiusKnob, width/2, height - 150, 0, 255, 0, 0,"Green", "white", 16);
   colorKnobB = new MakeKnobC([0,0,255], radiusKnob, width/2 + radiusKnob * knobSpaceFactor, height - 150, 0, 255, 0, 0,"Blue", "white", 16);
  
+
   uniqueID = int(10000*Math.random(10000))
   alert = uniqueID
   client = new Paho.MQTT.Client("makerlabPi1", 9001, "colorKnobs.js" + str(uniqueID));
+  client.onMessageArrived = onMessageArrived;
   client.connect({onSuccess:onConnect});
 }
 
+
 function onConnect() {
-  //console.log("onConnect");
-  //client.subscribe("Knobs");
-  message = new Paho.MQTT.Message("Knobs Connected!");
-  message.destinationName = "Knobs";
-  client.send(message);
+  console.log("onConnect");
+  client.subscribe("color/#");
+
 
   message = new Paho.MQTT.Message(str(int(colorKnobR.knobValue)));
   message.destinationName = "color/red";
@@ -58,6 +60,25 @@ function onConnect() {
 
 }
 
+// called when a message arrives
+function onMessageArrived(message) {
+  console.log("onMessageArrived:"+message.destinationName+ " " +message.payloadString);
+  if (message.destinationName == "color/red")
+  {  
+    colorKnobR.knobValue = int(message.payloadString)
+    console.log("setRed to " + message.payloadString)
+  }
+  else if (message.destinationName == "color/green")
+    colorKnobG.knobValue = int(message.payloadString)
+  else if (message.destinationName == "color/blue")
+    colorKnobB.knobValue = int(message.payloadString)
+
+  colorKnobR.update();
+  colorKnobG.update();
+  colorKnobB.update();
+
+}
+
 function draw() {
   background(255-colorKnobR.knobValue,255-colorKnobG.knobValue,255-colorKnobB.knobValue); // Use the knob to control something
   colorKnobR.update();
@@ -65,9 +86,11 @@ function draw() {
   colorKnobB.update();
   strokeWeight(4);
 
-  fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
+  donutColor = [colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue];
+  backgndColor = [255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue ]
+  fill(donutColor);
   ellipse(width/2, height*.35, donutSize, donutSize * donutStretchRatio);
-  fill(255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue );
+  fill(backgndColor);
   ellipse(width/2, height*.35, donutHoleSize, donutHoleSize * donutStretchRatio);
 
   textSize(40);
