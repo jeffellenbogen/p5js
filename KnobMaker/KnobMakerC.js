@@ -130,5 +130,10 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
     cursor('default');
   }
 
+  this.set = function() {
+    this.currentRot=this.
+
+  }
+
 
 } // end KnobMakerC
