@@ -131,7 +131,7 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
   }
 
   this.set = function() {
-    this.currentRot=this.
+    this.rotateMe=map(this.
 
   }
 

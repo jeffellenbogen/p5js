@@ -4,6 +4,11 @@
 
 // Create a variable for each instance of a knob or make bunch with an array
 var colorKnobR, colorKnobG, colorKnobB;
+var donutR = 0;
+var donutG = 0; 
+var donutB = 0;
+var backgndColor = 255;
+var donutColor = 0;
 var radiusKnob;
 var donutSize;
 var donutHoleSize;
@@ -37,7 +42,7 @@ function setup() {
 
   uniqueID = int(10000*Math.random(10000))
   alert = uniqueID
-  client = new Paho.MQTT.Client("192.168.204.106", 9001, "colorKnobs.js" + str(uniqueID));
+  client = new Paho.MQTT.Client("mqttbroker", 9001, "colorKnobs.js" + str(uniqueID));
   client.onMessageArrived = onMessageArrived;
   client.connect({onSuccess:onConnect});
 }
@@ -64,46 +69,37 @@ function onConnect() {
 function onMessageArrived(message) {
   console.log("onMessageArrived:"+message.destinationName+ " " +message.payloadString);
   if (message.destinationName == "color/red")
-  {  
-    colorKnobR.knobValue = int(message.payloadString)
-    console.log("setRed to " + message.payloadString)
-  }
+    donutR = int(message.payloadString);
   else if (message.destinationName == "color/green")
-    colorKnobG.knobValue = int(message.payloadString)
+    donutG = int(message.payloadString);
   else if (message.destinationName == "color/blue")
-    colorKnobB.knobValue = int(message.payloadString)
-
-  colorKnobR.update();
-  colorKnobG.update();
-  colorKnobB.update();
-
+    donutB = int(message.payloadString);
+  donutColor = [donutR, donutG, donutB];
+  backgndColor = [255-donutR, 255-donutG, 255-donutB];
 }
 
 function draw() {
-  background(255-colorKnobR.knobValue,255-colorKnobG.knobValue,255-colorKnobB.knobValue); // Use the knob to control something
+  background(backgndColor); // Use the knob to control something
   colorKnobR.update();
   colorKnobG.update();
   colorKnobB.update();
   strokeWeight(4);
-
-  donutColor = [colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue];
-  backgndColor = [255 - colorKnobR.knobValue, 255 - colorKnobG.knobValue, 255 - colorKnobB.knobValue ]
   fill(donutColor);
   ellipse(width/2, height*.35, donutSize, donutSize * donutStretchRatio);
   fill(backgndColor);
   ellipse(width/2, height*.35, donutHoleSize, donutHoleSize * donutStretchRatio);
 
   textSize(40);
-  fill(colorKnobR.knobValue,colorKnobG.knobValue,colorKnobB.knobValue );
+  fill(donutColor);
   strokeWeight(3);
   stroke(255);
-  text(int(colorKnobR.knobValue) + " " +int(colorKnobG.knobValue) + " " + int(colorKnobB.knobValue), width/2, 40);
+  text(int(donutR) + " " +int(donutG) + " " + int(donutB), width/2, 40);
   stroke(0);
 }
 
 function mousePressed() { 
 	colorKnobR.active(); 
-	colorKnobG.active(); 
+	colorKnobG.active();   
 	colorKnobB.active(); 
 }
 
