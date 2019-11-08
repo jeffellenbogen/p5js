@@ -37,7 +37,7 @@ function setup() {
 
   uniqueID = int(10000*Math.random(10000))
   alert = uniqueID
-  client = new Paho.MQTT.Client("makerlabPi1", 9001, "colorKnobs.js" + str(uniqueID));
+  client = new Paho.MQTT.Client("192.168.204.106", 9001, "colorKnobs.js" + str(uniqueID));
   client.onMessageArrived = onMessageArrived;
   client.connect({onSuccess:onConnect});
 }
