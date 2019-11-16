@@ -130,8 +130,8 @@ function MakeKnobC(knobColor, diameter, locx, locy, lowNum, hiNum, defaultNum, n
     cursor('default');
   }
 
-  this.set = function() {
-   // this.rotateMe=map(this.
+  this.set = function(slideVal) {
+     this.rotateMe = map(slideVal, lowNum, hiNum, 0, -280); 
 
   }
 

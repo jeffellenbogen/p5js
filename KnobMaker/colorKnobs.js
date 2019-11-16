@@ -69,11 +69,20 @@ function onConnect() {
 function onMessageArrived(message) {
   console.log("onMessageArrived:"+message.destinationName+ " " +message.payloadString);
   if (message.destinationName == "color/red")
+  {
     donutR = int(message.payloadString);
+    colorKnobR.set(int(message.payloadString));
+  }
   else if (message.destinationName == "color/green")
+  {
     donutG = int(message.payloadString);
+    colorKnobG.set(int(message.payloadString));
+  }
   else if (message.destinationName == "color/blue")
+  {
     donutB = int(message.payloadString);
+    colorKnobB.set(int(message.payloadString));
+  }
   donutColor = [donutR, donutG, donutB];
   backgndColor = [255-donutR, 255-donutG, 255-donutB];
 }
